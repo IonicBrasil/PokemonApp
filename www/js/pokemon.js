@@ -11,17 +11,18 @@ angular.module("Pokemon", [])
 
         var getPokemon = function(_id) {
             return $http.get(URL + VERSION + '/pokemon/' + _id + '/');
-        }
+        };
 
         var getSprites = function(_pokemon) {
+
             var sprites = [];
 
-            angular.each(_pokemon.sprites, function(sprite){
-                sprites.push($http.get('http://pokeapi.co/' + sprite.resource_uri));
-            });
+                angular.forEach(_pokemon.sprites, function(sprite){
+                    sprites.push($http.get('http://pokeapi.co/' + sprite.resource_uri));
+                });
 
             return $q.all(sprites);
-        }
+        };
 
 
         return {

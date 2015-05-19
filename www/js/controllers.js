@@ -68,21 +68,20 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
          Pokemon.getPokemon($stateParams.id).then( function(_response) {
               $scope.pokemon = _response.data;
 
-
               console.log(_response.data);
 
              $scope.hideLoading();
 
-               //return pokemon.data.id;
             return _response.data;
 
-            }).then(function(_pokemon){
-                /// @TODO              
+            }).then(function(_pokemon) {
+
                  Pokemon.getSprites(_pokemon).then(function(_responses){
-                    console.log(_responses);
+
+                     var _firstSprite = 'http://pokeapi.co'  + _responses[0].data.image;
+                     $scope.sprite = _firstSprite;
+
                  });
                 });
-                    
-                  //http://pokeapi.co/api/v1/sprite/1/
-                  $scope.sprite = null;
+
               }]);
