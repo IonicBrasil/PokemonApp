@@ -1,7 +1,20 @@
-<ion-view view-title="Playlist">
+<ion-view view-title="Detalhes de {{pokemon.name}}">
   <ion-content>
-    <h1>{{ pokemon.name }}</h1>
 
-      <img ng-src="{{sprite}}" alt=""/>
+      <div class="list">
+
+          <a class="item item-thumbnail-left" href="#">
+              <img ng-src="{{sprite}}" alt="{{pokemon.name}}">
+              <h2>{{ pokemon.name }}</h2>
+              <p>Ataque: {{ pokemon.attack }}</p>
+              <p>Defesa: {{ pokemon.defense }}</p>
+              <p>HP: {{ pokemon.hp }}</p>
+              <p>Altura: {{ pokemon.height }}</p>
+              <p>Velocidade: {{ pokemon.speed }}</p>
+
+          </a>
+
+      </div>
+
   </ion-content>
 </ion-view>

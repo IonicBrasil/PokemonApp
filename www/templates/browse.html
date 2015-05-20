@@ -1,4 +1,4 @@
-<ion-view view-title="Pokemons">
+<ion-view view-title="Pokémons">
   <ion-content>
       <div class="bar bar-header item-input-inset">
           <!-- <label class="item-input-wrapper"> -->
@@ -8,7 +8,7 @@
           </label>
       </div>
       <ion-list>
-          <ion-item class="item" collection-repeat="pokemon in pokemons.pokemon | filter:search"
+          <ion-item class="item" ng-repeat="pokemon in pokemons.pokemon | filter:search"
                     href="#/app/{{ pokemon.resource_uri }}">
               {{ pokemon.name }}
           </ion-item>
