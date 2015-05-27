@@ -1,7 +1,13 @@
 {
-  "name": "livros",
+  "name": "Pokédex Ionic Brasil",
   "version": "1.0.0",
-  "description": "Livros: An Ionic project",
+  "description": "Aplicativo de poke agenda da Ionic Brasil",
+  "contributors":[
+    {"name": "Jefferson Souza", "url": "https://github.com/jeffersonsouza"},
+    {"name": "Diego Ramos", "url": "https://github.com/rdiego26"},
+    {"name": "Felipe Breuil", "url": "https://github.com/fbreuil"},
+    {"name": "Jorge Eduardo", "url": "https://github.com/jorgeduardo"}
+  ],
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
