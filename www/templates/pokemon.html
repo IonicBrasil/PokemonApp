@@ -3,7 +3,7 @@
 
       <div class="list">
 
-          <a class="item item-thumbnail-left" href="#">
+          <span class="item item-thumbnail-left" href="#">
               <img ng-src="{{sprite}}" alt="{{pokemon.name}}">
               <h2>{{ pokemon.name }}</h2>
               <p>Ataque: {{ pokemon.attack }}</p>
@@ -12,7 +12,25 @@
               <p>Altura: {{ pokemon.height }}</p>
               <p>Velocidade: {{ pokemon.speed }}</p>
 
-          </a>
+              <br>
+
+              <h2>Tipo ({{pokemon.types.length}})</h2>
+              <p>
+                <span ng-repeat="type in pokemon.types">
+                  {{type.name}}{{$last ? '' : ' / '}}
+                </span>
+              </p>
+
+              <br>
+
+              <h2 ng-click="showEvolutions()">Evolução ({{pokemon.evolutions.length}})</h2>
+              <p ng-if="showEvolution">
+                  <span ng-repeat="evolution in pokemon.evolutions">
+                      <a href="#/app{{ evolution.resource_uri }}"> {{evolution.to}}</a> <br>
+                  </span>
+              </p>
+
+          </span>
 
       </div>
 
