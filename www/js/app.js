@@ -40,6 +40,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  // .state('app.about', {
+  //   url: "/about",
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: "templates/about.html",
+  //         controller:"SobreCtrl"
+  //     }
+  //   }
+  // })
+
   .state('app.single', {
     url: "/api/v1/pokemon/:id/",
     views: {

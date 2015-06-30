@@ -7,7 +7,7 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
 
    $scope.showLoading = function(_message) {
 
-       _message = _message || 'Loading...';
+       _message = _message || '<ion-spinner></ion-spinner></br>Loading...';
 
        $ionicLoading.show({
            template: _message
@@ -46,11 +46,28 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
       $scope.closeLogin();
     }, 1000);
   };
+
+// --------Modal from the left Menu---------
+
+  $ionicModal.fromTemplateUrl('templates/about.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.closeAbout = function() {
+    $scope.modal.hide();
+  };
+
+  $scope.showAbout = function() {
+    $scope.modal.show();
+  };
+
 })
 
 .controller('ListarCtrl', ['$scope', '$http', 'Pokemon', function($scope, $http, Pokemon) {
 
-   $scope.showLoading('Loading pokémons...');
+   $scope.showLoading('<ion-spinner></ion-spinner></br>Loading pokémons...');
 
     Pokemon.getPokedex().then(function(pokemons){
         $scope.pokemons = pokemons.data;
@@ -59,7 +76,7 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
 }])
 
 
-.controller('PokemonCtrl',['$scope', '$stateParams', '$http', 'Pokemon', 
+.controller('PokemonCtrl',['$scope', '$stateParams', '$http', 'Pokemon',
                     function($scope, $stateParams, $http, Pokemon) {
 
 
@@ -81,30 +98,36 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
 
             }).then(function(_pokemon) {
 
-                 Pokemon.getSprites(_pokemon).then(function(_responses) {
+             Pokemon.getSprites(_pokemon).then(function (_responses) {
 
-                     var _firstSprite;
+                 var _firstSprite;
 
-                     if(_responses.length === 0) {
+                 if (_responses.length === 0) {
 
-                         //Coloca sprite do pokemonstadium
-                         var _pokemonName = _pokemon.name.toLowerCase();
+                     //Coloca sprite do pokemonstadium
+                     var _pokemonName = _pokemon.name.toLowerCase();
 
-                         //Tratamento diferenciado
-                         if(_pokemonName.indexOf('charizard-mega') != -1 ||
-                             _pokemonName.indexOf('mewtwo-mega') != -1 ) {
-                             _pokemonName = _pokemonName.replace(/-([^-]*)$/,''+'$1');
-                         }
-
-                         _firstSprite = 'http://www.pokestadium.com/sprites/xy/' + _pokemonName + '.gif';
-                     } else {
-                         _firstSprite = 'http://pokeapi.co'  + _responses[0].data.image;
+                     //Tratamento diferenciado
+                     if (_pokemonName.indexOf('charizard-mega') != -1 ||
+                         _pokemonName.indexOf('mewtwo-mega') != -1) {
+                         _pokemonName = _pokemonName.replace(/-([^-]*)$/, '' + '$1');
                      }
 
-                     $scope.sprite = _firstSprite;
+                     _firstSprite = 'http://www.pokestadium.com/sprites/xy/' + _pokemonName + '.gif';
+                 } else {
+                     _firstSprite = 'http://pokeapi.co' + _responses[0].data.image;
+                 }
 
-                 });
+                 $scope.sprite = _firstSprite;
 
-                });
 
-        }]);
+             })
+         });
+
+
+}]);
+
+                  //http://pokeapi.co/api/v1/sprite/1/
+                //  $scope.sprite = null;
+              //}]);
+
