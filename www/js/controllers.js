@@ -81,25 +81,53 @@ angular.module('starter.controllers', ['Pokemon', 'ionic'])
 
 
          $scope.showLoading();
+         $scope.showEvolution = false;
+
+         $scope.showEvolutions = function() {
+            $scope.showEvolution = !$scope.showEvolution;
+         };
 
          Pokemon.getPokemon($stateParams.id).then( function(_response) {
               $scope.pokemon = _response.data;
-
 
               console.log(_response.data);
 
              $scope.hideLoading();
 
-               //return pokemon.data.id;
             return _response.data;
 
-            }).then(function(_pokemon){
-                /// @TODO
-                 Pokemon.getSprites(_pokemon).then(function(_responses){
-                    console.log(_responses);
-                 });
-                });
+            }).then(function(_pokemon) {
+
+             Pokemon.getSprites(_pokemon).then(function (_responses) {
+
+                 var _firstSprite;
+
+                 if (_responses.length === 0) {
+
+                     //Coloca sprite do pokemonstadium
+                     var _pokemonName = _pokemon.name.toLowerCase();
+
+                     //Tratamento diferenciado
+                     if (_pokemonName.indexOf('charizard-mega') != -1 ||
+                         _pokemonName.indexOf('mewtwo-mega') != -1) {
+                         _pokemonName = _pokemonName.replace(/-([^-]*)$/, '' + '$1');
+                     }
+
+                     _firstSprite = 'http://www.pokestadium.com/sprites/xy/' + _pokemonName + '.gif';
+                 } else {
+                     _firstSprite = 'http://pokeapi.co' + _responses[0].data.image;
+                 }
+
+                 $scope.sprite = _firstSprite;
+
+
+             })
+         });
+
+
+}]);
 
                   //http://pokeapi.co/api/v1/sprite/1/
-                  $scope.sprite = null;
-              }]);
+                //  $scope.sprite = null;
+              //}]);
+
